@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RR Studio | Best Wedding Photographer in Begusarai</title>
+  <meta name="description" content="RR Studio – Professional wedding photography & videography in Begusarai, Barauni. Capturing timeless moments of love and celebration." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --charcoal: #2a2622;
+      --charcoal-light: #3d3833;
+      --cream: #f8f4ef;
+      --cream-dark: #efe8df;
+      --gold: #c9a66b;
+      --gold-light: #e0c89a;
+      --rose: #b76e79;
+      --white: #ffffff;
+      --text: #2a2622;
+      --text-muted: #6b6560;
+      --radius: 12px;
+      --shadow: 0 20px 50px rgba(42, 38, 34, 0.12);
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* Typography */
+    .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; line-height: 1.15; }
+
+    /* Navbar */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.25rem 0;
+      transition: var(--transition);
+    }
+    .nav.scrolled {
+      background: rgba(42, 38, 34, 0.92);
+      backdrop-filter: blur(12px);
+      padding: 0.85rem 0;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--white);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .menu-toggle span {
+      width: 24px; height: 2px;
+      background: white;
+      transition: 0.3s;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-slider {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      transform: scale(1.05);
+    }
+    .hero-slide.active {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity 1.2s ease, transform 8s ease;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(42,38,34,0.45) 0%, rgba(42,38,34,0.65) 60%, rgba(42,38,34,0.8) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+      padding: 0 1.5rem;
+      max-width: 900px;
+    }
+    .hero-content .label { color: var(--gold-light); margin-bottom: 1rem; display: block; }
+    .hero-content h1 {
+      font-size: clamp(3.2rem, 8vw, 5.5rem);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+    .hero-content p {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.95rem 2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: all 0.35s;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--charcoal);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(201,166,107,0.35);
+    }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.6);
+      color: white;
+    }
+    .btn-outline:hover {
+      background: white;
+      color: var(--charcoal);
+      border-color: white;
+    }
+    .hero-dots {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 3;
+    }
+    .hero-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .hero-dot.active {
+      background: var(--gold);
+      width: 28px;
+      border-radius: 4px;
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      opacity: 0.5;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* Sections common */
+    section { padding: 6rem 0; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-header .label { margin-bottom: 0.75rem; display: block; }
+    .section-header h2 {
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-img {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .about-img img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      transition: transform 0.8s;
+    }
+    .about-img:hover img { transform: scale(1.04); }
+    .about-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(201,166,107,0.3);
+      border-radius: var(--radius);
+      pointer-events: none;
+    }
+    .about-text .label { margin-bottom: 0.75rem; display: block; }
+    .about-text h2 {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      margin-bottom: 1.25rem;
+    }
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+    .about-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .stat h3 {
+      font-size: 2.4rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .stat span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Services */
+    .services { background: var(--white); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
+    }
+    .service-card {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 2.25rem 1.75rem;
+      transition: all 0.4s;
+      border: 1px solid transparent;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+      border-color: rgba(201,166,107,0.25);
+      background: white;
+    }
+    .service-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #c9a66b, #b76e79);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+      font-size: 1.4rem;
+    }
+    .service-card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 0.75rem;
+    }
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Gallery */
+    .gallery-filters {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.5rem 1.3rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border: 1px solid var(--cream-dark);
+      transition: all 0.3s;
+      background: white;
+    }
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--charcoal);
+      color: white;
+      border-color: var(--charcoal);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      cursor: pointer;
+    }
+    .gallery-item.wide { grid-column: span 2; aspect-ratio: 16/9; }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s;
+    }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(42,38,34,0.7) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      color: white;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    /* Pricing */
+    .pricing { background: var(--white); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      align-items: stretch;
+    }
+    .price-card {
+      background: var(--cream);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      position: relative;
+      border: 2px solid transparent;
+      transition: all 0.4s;
+    }
+    .price-card.popular {
+      background: var(--charcoal);
+      color: white;
+      border-color: var(--gold);
+      transform: scale(1.03);
+      box-shadow: 0 25px 60px rgba(42,38,34,0.25);
+    }
+    .price-card:hover { transform: translateY(-6px); }
+    .price-card.popular:hover { transform: scale(1.03) translateY(-6px); }
+    .popular-badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--charcoal);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      text-transform: uppercase;
+    }
+    .price-card h3 {
+      font-size: 1.7rem;
+      margin-bottom: 0.35rem;
+    }
+    .price-card .subtitle {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-bottom: 1.5rem;
+    }
+    .price-card .amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 1.75rem;
+    }
+    .price-card.popular .amount { color: var(--gold-light); }
+    .price-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+    .price-features li {
+      padding: 0.55rem 0;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .price-card.popular .price-features li {
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
+    .price-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .price-card .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .price-card.popular .btn-primary {
+      background: var(--gold);
+      color: var(--charcoal);
+    }
+
+    /* Testimonials */
+    .testimonials-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonial-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.5s ease;
+    }
+    .testimonial-card {
+      min-width: calc(33.333% - 1rem);
+      background: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(42,38,34,0.06);
+      border: 1px solid var(--cream-dark);
+    }
+    .testimonial-card .stars {
+      color: var(--gold);
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+    .testimonial-card p {
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .author-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--rose));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .author-info strong { display: block; font-size: 0.95rem; }
+    .author-info span { font-size: 0.8rem; color: var(--text-muted); }
+    .testimonial-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+    .testimonial-nav button {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid var(--cream-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      background: white;
+    }
+    .testimonial-nav button:hover {
+      background: var(--charcoal);
+      color: white;
+      border-color: var(--charcoal);
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3.5rem;
+    }
+    .contact-info h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 1rem;
+    }
+    .contact-info > p {
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .contact-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold), #b76e79);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+    .contact-item strong { display: block; font-size: 0.9rem; margin-bottom: 0.15rem; }
+    .contact-item a, .contact-item span {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    .contact-item a:hover { color: var(--gold); }
+    .contact-form {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid var(--cream-dark);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: var(--cream);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,166,107,0.15);
+      background: white;
+    }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+
+    /* Footer */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.75);
+      padding: 4rem 0 2rem;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand .logo { color: white; margin-bottom: 0.75rem; display: block; }
+    .footer-brand p { max-width: 280px; font-size: 0.9rem; line-height: 1.7; }
+    .footer-links h4 {
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      font-weight: 500;
+    }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 0.6rem; }
+    .footer-links a {
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .socials {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .socials a {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+    }
+    .socials a:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--charcoal);
+    }
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(20,18,16,0.95);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+    }
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 88vh;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .about-grid,
+      .contact-grid,
+      .pricing-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.wide { grid-column: span 1; aspect-ratio: 4/5; }
+      .testimonial-card { min-width: calc(50% - 0.75rem); }
+      .price-card.popular { transform: none; }
+      .nav-links, .nav-cta { display: none; }
+      .menu-toggle { display: flex; }
+      .nav.open .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(42,38,34,0.97);
+        padding: 1.5rem;
+        gap: 1.25rem;
+      }
+      .nav.open .nav-cta {
+        display: block;
+        margin: 1rem 1.5rem 0;
+        text-align: center;
+      }
+    }
+    @media (max-width: 640px) {
+      section { padding: 4rem 0; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .testimonial-card { min-width: 100%; }
+      .about-stats { gap: 1.5rem; }
+      .hero-btns { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#home" class="logo">RR STUDIO</a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Book Now</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-slider" id="heroSlider">
+      <div class="hero-slide active" style="background-image:url('https://rrevent.in/assets/hero-slide-1-Cho4KZtk.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://rrevent.in/assets/hero-slide-2-CklCZEKA.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://rrevent.in/assets/hero-slide-3-79aKBUYp.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://rrevent.in/assets/hero-slide-4-AKa96WZS.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://rrevent.in/assets/hero-slide-9-BOweM9Bt.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://rrevent.in/assets/hero-slide-5-Cwi-FmxC.jpg')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="label">Wedding Photography</span>
+      <h1>RR STUDIO</h1>
+      <p>Best Wedding Photographer in Begusarai</p>
+      <div class="hero-btns">
+        <a href="#gallery" class="btn btn-primary">View Gallery →</a>
+        <a href="#contact" class="btn btn-outline">Book Your Session</a>
+      </div>
+    </div>
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img reveal">
+          <img src="https://rrevent.in/assets/about-photographer-CMBLkNkN.jpg" alt="RR Studio professional wedding photographer" loading="lazy" />
+        </div>
+        <div class="about-text reveal">
+          <span class="label">About Me</span>
+          <h2>Capturing Love,<br>One Frame at a Time</h2>
+          <p>Welcome to RR Studio — the passionate wedding photography studio based in Begusarai, Barauni. We specialize in capturing the authentic emotions, candid moments, and timeless beauty of your special day.</p>
+          <p>From intimate engagement sessions to grand traditional weddings and cinematic films, every frame is crafted with artistry, heart, and attention to detail. Your story deserves to be told beautifully.</p>
+          <div class="about-stats">
+            <div class="stat">
+              <h3>500+</h3>
+              <span>Weddings</span>
+            </div>
+            <div class="stat">
+              <h3>8+</h3>
+              <span>Years Exp.</span>
+            </div>
+            <div class="stat">
+              <h3>100%</h3>
+              <span>Happy Clients</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">What We Offer</span>
+        <h2>Our Services</h2>
+        <p>Complete wedding photography & videography packages tailored to make your day unforgettable.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">📷</div>
+          <h3>Full Day Coverage</h3>
+          <p>Complete documentation from preparation to the last dance, ensuring no moment is missed.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">💍</div>
+          <h3>Engagement Sessions</h3>
+          <p>Celebrate your journey with a romantic pre-wedding photoshoot at your favorite location.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">📖</div>
+          <h3>Fine Art Albums</h3>
+          <p>Handcrafted heirloom albums that beautifully preserve your wedding story for generations.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🎥</div>
+          <h3>Cinematic Films</h3>
+          <p>Story-driven wedding films with beautiful cinematography that feel like a Bollywood movie.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">👥</div>
+          <h3>Second Photographer</h3>
+          <p>Additional coverage to capture every angle and intimate moment throughout your day.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">✨</div>
+          <h3>Haldi & Mehndi</h3>
+          <p>Vibrant coverage of pre-wedding ceremonies with color, emotion and tradition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Our Work</span>
+        <h2>Gallery</h2>
+        <p>A glimpse into the love stories we've been privileged to document.</p>
+      </div>
+      <div class="gallery-filters reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="wedding">Wedding</button>
+        <button class="filter-btn" data-filter="prewedding">Pre-Wedding</button>
+        <button class="filter-btn" data-filter="ceremony">Ceremony</button>
+      </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <div class="gallery-item wide" data-cat="wedding">
+          <img src="https://rrevent.in/assets/gallery-couple-D6aAWhBR.jpg" alt="Couple portrait" loading="lazy" />
+          <div class="gallery-overlay"><span>Wedding Couple</span></div>
+        </div>
+        <div class="gallery-item" data-cat="prewedding">
+          <img src="https://rrevent.in/assets/gallery-prewedding-hAbvGBXW.jpg" alt="Pre-wedding" loading="lazy" />
+          <div class="gallery-overlay"><span>Pre-Wedding</span></div>
+        </div>
+        <div class="gallery-item" data-cat="wedding">
+          <img src="https://rrevent.in/assets/gallery-bride-zJqAIEBZ.jpg" alt="Bride" loading="lazy" />
+          <div class="gallery-overlay"><span>Bridal Portrait</span></div>
+        </div>
+        <div class="gallery-item" data-cat="ceremony">
+          <img src="https://rrevent.in/assets/gallery-mehndi-B6BUOjS8.jpg" alt="Mehndi" loading="lazy" />
+          <div class="gallery-overlay"><span>Mehndi Ceremony</span></div>
+        </div>
+        <div class="gallery-item wide" data-cat="ceremony">
+          <img src="https://rrevent.in/assets/gallery-wedding-ceremony--_q2DW3c.jpg" alt="Wedding ceremony" loading="lazy" />
+          <div class="gallery-overlay"><span>Wedding Ceremony</span></div>
+        </div>
+        <div class="gallery-item" data-cat="wedding">
+          <img src="https://rrevent.in/assets/gallery-1-BEGBGWlX.jpg" alt="Wedding moment" loading="lazy" />
+          <div class="gallery-overlay"><span>Candid Moment</span></div>
+        </div>
+        <div class="gallery-item" data-cat="wedding">
+          <img src="https://rrevent.in/assets/gallery-2-WYfyOLAI.jpg" alt="Wedding details" loading="lazy" />
+          <div class="gallery-overlay"><span>Details</span></div>
+        </div>
+        <div class="gallery-item" data-cat="ceremony">
+          <img src="https://rrevent.in/assets/wedding-haldi-C1Axm0CW.jpg" alt="Haldi" loading="lazy" />
+          <div class="gallery-overlay"><span>Haldi</span></div>
+        </div>
+        <div class="gallery-item" data-cat="wedding">
+          <img src="https://rrevent.in/assets/wedding-bride-red-DPA25S--.jpg" alt="Bride in red" loading="lazy" />
+          <div class="gallery-overlay"><span>Bridal Look</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Packages</span>
+        <h2>Pricing</h2>
+        <p>Transparent packages designed for every kind of celebration.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card reveal">
+          <h3>Bronze</h3>
+          <p class="subtitle">2 Days · Traditional Wedding</p>
+          <div class="amount">₹25,000</div>
+          <ul class="price-features">
+            <li>1 Videographer</li>
+            <li>8–12 hours coverage</li>
+            <li>Highlight reel</li>
+            <li>Edited photos</li>
+            <li>Online gallery</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Choose Bronze</a>
+        </div>
+        <div class="price-card popular reveal">
+          <span class="popular-badge">Most Popular</span>
+          <h3>Silver</h3>
+          <p class="subtitle">2 Days · Cinematic Wedding</p>
+          <div class="amount">₹55,000</div>
+          <ul class="price-features">
+            <li>1 Photographer + 1 Videographer</li>
+            <li>Full day coverage</li>
+            <li>Cinematic film</li>
+            <li>Premium edited photos</li>
+            <li>Online gallery + album option</li>
+            <li>Second shooter available</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Choose Silver</a>
+        </div>
+        <div class="price-card reveal">
+          <h3>Gold</h3>
+          <p class="subtitle">Pre-wedding + Wedding · Cinematic</p>
+          <div class="amount">₹1,00,000</div>
+          <ul class="price-features">
+            <li>All Wedding Coverage</li>
+            <li>Pre-wedding shoot</li>
+            <li>Full cinematic film</li>
+            <li>Fine art album</li>
+            <li>Multiple photographers</li>
+            <li>Priority delivery</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Choose Gold</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Testimonials</span>
+        <h2>What Our Clients Say</h2>
+        <p>Real words from couples who trusted us with their most special day.</p>
+      </div>
+      <div class="testimonials-wrap reveal">
+        <div class="testimonial-track" id="testimonialTrack">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"RR Studio captured our wedding beautifully! Every moment was preserved with such artistic perfection. Highly recommended!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">PS</div>
+              <div class="author-info">
+                <strong>Priya Sharma</strong>
+                <span>2 months ago</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Amazing photography skills! The team was professional and made us feel comfortable throughout the ceremony. Best decision we made."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">RK</div>
+              <div class="author-info">
+                <strong>Rahul Kumar</strong>
+                <span>3 months ago</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Exceptional quality and creativity. Our wedding album looks like a fairy tale. Thank you RR Studio for the magical memories!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">AV</div>
+              <div class="author-info">
+                <strong>Anjali Verma</strong>
+                <span>1 month ago</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Outstanding work! They captured emotions and candid moments perfectly. The team is very talented and dedicated."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">VS</div>
+              <div class="author-info">
+                <strong>Vikash Singh</strong>
+                <span>4 months ago</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Best wedding photographers in Begusarai! Professional, creative, and delivered stunning photos on time. Worth every penny!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">NG</div>
+              <div class="author-info">
+                <strong>Neha Gupta</strong>
+                <span>2 weeks ago</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"The candid shots were absolutely stunning. Highly professional team who made our special day even more memorable!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">AY</div>
+              <div class="author-info">
+                <strong>Amit Yadav</strong>
+                <span>1 week ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-nav">
+          <button id="prevTestimonial" aria-label="Previous">←</button>
+          <button id="nextTestimonial" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" style="background:var(--cream-dark)">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <span class="label">Get In Touch</span>
+          <h2>Let's Create Magic Together</h2>
+          <p>Ready to book your wedding photography? We'd love to hear from you and learn about your special day.</p>
+          <div class="contact-details">
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div>
+                <strong>Phone / WhatsApp</strong>
+                <a href="tel:+916204026201">+91 62040 26201</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <strong>Email</strong>
+                <a href="mailto:rrstudiobju@gmail.com">rrstudiobju@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div>
+                <strong>Location</strong>
+                <span>Begusarai, Barauni</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📷</div>
+              <div>
+                <strong>Instagram</strong>
+                <a href="https://instagram.com/rr_studio2" target="_blank" rel="noopener">@rr_studio2</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form reveal">
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required placeholder="Full name" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="you@email.com" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="date">Wedding Date</label>
+              <input type="date" id="date" name="date" />
+            </div>
+            <div class="form-group">
+              <label for="message">Tell Us About Your Day</label>
+              <textarea id="message" name="message" placeholder="Venue, style, any special requests..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#home" class="logo">RR STUDIO</a>
+          <p>Capturing love, one frame at a time. Professional wedding photography & videography in Begusarai.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Connect</h4>
+          <div class="socials">
+            <a href="https://instagram.com/rr_studio2" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+            <a href="https://wa.me/916204026201" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+            <a href="mailto:rrstudiobju@gmail.com" aria-label="Email">✉</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 RR Studio. All rights reserved. · Begusarai, Bihar
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
+    <img src="" alt="Gallery image" id="lightboxImg" />
+  </div>
+
+  <script>
+    // ===== Navbar scroll =====
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ===== Mobile menu =====
+    const menuToggle = document.getElementById('menuToggle');
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => nav.classList.remove('open'));
+    });
+
+    // ===== Hero Slider =====
+    const slides = document.querySelectorAll('.hero-slide');
+    const dotsContainer = document.getElementById('heroDots');
+    let currentSlide = 0;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+    const dots = document.querySelectorAll('.hero-dot');
+
+    function goToSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = n;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    setInterval(() => {
+      goToSlide((currentSlide + 1) % slides.length);
+    }, 5000);
+
+    // ===== Gallery filter =====
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        galleryItems.forEach(item => {
+          if (filter === 'all' || item.dataset.cat === filter) {
+            item.style.display = '';
+            item.style.opacity = '0';
+            setTimeout(() => { item.style.opacity = '1'; }, 50);
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // ===== Lightbox =====
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // ===== Testimonials carousel =====
+    const track = document.getElementById('testimonialTrack');
+    const cards = track.querySelectorAll('.testimonial-card');
+    let testimonialIndex = 0;
+    let cardsPerView = window.innerWidth > 980 ? 3 : window.innerWidth > 640 ? 2 : 1;
+
+    function updateTestimonial() {
+      const cardWidth = cards[0].offsetWidth + 24;
+      track.style.transform = `translateX(-${testimonialIndex * cardWidth}px)`;
+    }
+
+    document.getElementById('nextTestimonial').addEventListener('click', () => {
+      const max = cards.length - cardsPerView;
+      testimonialIndex = Math.min(testimonialIndex + 1, max);
+      updateTestimonial();
+    });
+    document.getElementById('prevTestimonial').addEventListener('click', () => {
+      testimonialIndex = Math.max(testimonialIndex - 1, 0);
+      updateTestimonial();
+    });
+
+    window.addEventListener('resize', () => {
+      cardsPerView = window.innerWidth > 980 ? 3 : window.innerWidth > 640 ? 2 : 1;
+      testimonialIndex = Math.min(testimonialIndex, cards.length - cardsPerView);
+      updateTestimonial();
+    });
+
+    // ===== Scroll reveal =====
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // ===== Contact form =====
+    function handleSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const date = document.getElementById('date').value;
+      const message = document.getElementById('message').value;
+      const subject = encodeURIComponent('Wedding Enquiry from ' + name);
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nWedding Date: ${date || 'Not specified'}\n\nMessage:\n${message}`
+      );
+      window.location.href = `mailto:rrstudiobju@gmail.com?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
